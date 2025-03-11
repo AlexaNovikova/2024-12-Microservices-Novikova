@@ -25,15 +25,3 @@ spec:
           image: alexadubinina87/dockertest:v02
           ports:
             - containerPort: 8000
-          livenessProbe:
-            httpGet:
-              path: /health
-              port: 8000
-            initialDelaySeconds: 5
-            periodSeconds: 30
-            readinessProbe:
-              httpGet:
-                path: /health
-                port: 8000
-              initialDelaySeconds: 5
-              periodSeconds: 10
