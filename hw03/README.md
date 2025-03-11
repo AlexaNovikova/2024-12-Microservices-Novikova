@@ -1,35 +1,53 @@
 # Домашнее задание
-## Приложение в docker-образ и запушить его на Dockerhub
+Основы работы с Kubernetes (Часть 2)
 
-## Цель:
-Обернуть приложение в docker-образ и запушить его на Dockerhub.
-
-
-## Описание/Пошаговая инструкция выполнения домашнего задания:
-
-- Шаг 1. Создать минимальный сервис, который отвечает на порту 8000 , имеет http-метод: GET /health/  RESPONSE: {"status": "OK"}
-
-- Шаг 2. Cобрать локально образ приложения в докер контенер под архитектуру AMD64.
-
-- Запушить образ в dockerhub
+# Цель:
+В этом ДЗ вы научитесь создавать минимальный сервис.
 
 
-### На выходе необходимо предоставить
-- имя репозитория и тэг на Dockerhub 
-- ссылку на github c Dockerfile, либо приложить Dockerfile в ДЗ
+# Описание/Пошаговая инструкция выполнения домашнего задания:
+Шаг 1. Создать минимальный сервис, который
 
-Обратите внимание, что при сборке на m1 при запуске вашего контейнера на стандартных платформах будет ошибка такого вида:
+отвечает на порту 8000
+имеет http-метод
 
-standard_init_linux.go:228: exec user process caued: exec format error
+GET /health/
 
+
+RESPONSE: {"status": "OK"}
+
+
+# Шаг 2. Cобрать локально образ приложения в докер.
+Запушить образ в dockerhub
+
+
+# Шаг 3. Написать манифесты для деплоя в k8s для этого сервиса.
+
+
+Манифесты должны описывать сущности: Deployment, Service, Ingress.
+
+В Deployment могут быть указаны Liveness, Readiness пробы.
+
+Количество реплик должно быть не меньше 2. Image контейнера должен быть указан с Dockerhub.
+
+
+Хост в ингрессе должен быть arch.homework. В итоге после применения манифестов GET запрос на http://arch.homework/health должен отдавать {“status”: “OK”}.
+
+
+# Шаг 4. На выходе предоставить
+
+- ссылку на github c манифестами. Манифесты должны лежать в одной директории, так чтобы можно было их все применить одной командой kubectl apply -f .
+- url, по которому можно будет получить ответ от сервиса (либо тест в postmanе).
+
+
+Задание со звездой
+
+В Ingress-е должно быть правило, которое форвардит все запросы с /otusapp/{student name}/* на сервис с rewrite-ом пути. Где {student name} - это имя студента.
+
+Например: curl arch.homework/otusapp/aeugene/health -> рерайт пути на arch.homework/health
 
 Для сборки рекомендую указать тип платформы linux/amd64:
+docker build --platform linux/amd64 -t tag .
 
-docker build --platform linux/amd64 -t tag
 
-## Этапы выполнения:
-1) собрать jar файл hw02/hw02-0.0.1-SNAPSHOT.jar
-2) выполнить docker build --platform linux/amd64 -t alexadubinina87/dockertest:v02
-3) docker push alexadubinina87/dockertest:v02 
-
-## alexadubinina87/dockertest - это имя репозитория docker registry в docker hub
+Более подробно можно прочитать в статье: https://programmerah.com/how-to-solve-docker-run-error-standard_init_linux-go219-exec-user-process-caused-exec-format-error-39221/
