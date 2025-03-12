@@ -8,10 +8,10 @@ spec:
     - host: arch.homework
       http:
         paths:
-          - path: /app
+          - path: /
             pathType: Prefix
             backend:
               service:
-                name: health-service
+                name: service1
                 port:
                   number: 80

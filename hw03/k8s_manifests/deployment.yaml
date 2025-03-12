@@ -14,14 +14,14 @@ spec:
     type: RollingUpdate
   selector:
     matchLabels:
-      env: health
+      env: app1
   template:
     metadata:
       labels:
-        env: health
+        env: app1
     spec:
       containers:
         - name: kuber-app
-          image: alexadubinina87/dockertest:v02
+          image: alexadubinina87/dockertest:latest
           ports:
             - containerPort: 8000
