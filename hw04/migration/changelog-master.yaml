@@ -1,0 +1,4 @@
+databaseChangeLog:
+  - include:
+      file: create-user-table.xml
+      relativeToChangelogFile: true

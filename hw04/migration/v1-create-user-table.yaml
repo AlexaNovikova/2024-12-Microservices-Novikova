@@ -1,0 +1,45 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-users-table
+      author: AlexandraNovikova
+      stripComments: true
+      splitStatements: true
+      changes:
+        - createTable:
+            tableName: users
+            columns:
+              - column:
+                  name: id
+                  type: bigserial
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: userName
+                  type: varchar(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: firstName
+                  type: varchar(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: lastName
+                  type: varchar(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: login
+                  type: varchar(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: email
+                  type: varchar(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: phone
+                  type: varchar(20)
+                  constraints:
+                    nullable: false
