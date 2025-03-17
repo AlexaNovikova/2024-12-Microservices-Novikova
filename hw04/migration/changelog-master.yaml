@@ -1,4 +1,4 @@
 databaseChangeLog:
   - include:
-      file: create-user-table.xml
+      file: v1-create-user-table.yaml
       relativeToChangelogFile: true

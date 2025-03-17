@@ -1,6 +1,6 @@
 databaseChangeLog:
   - changeSet:
-      id: create-users-table
+      id: create-user-table
       author: AlexandraNovikova
       stripComments: true
       splitStatements: true
@@ -14,22 +14,17 @@ databaseChangeLog:
                   constraints:
                     primaryKey: true
               - column:
-                  name: userName
+                  name: user_name
                   type: varchar(100)
                   constraints:
                     nullable: false
               - column:
-                  name: firstName
+                  name: first_name
                   type: varchar(100)
                   constraints:
                     nullable: false
               - column:
-                  name: lastName
-                  type: varchar(100)
-                  constraints:
-                    nullable: false
-              - column:
-                  name: login
+                  name: last_name
                   type: varchar(100)
                   constraints:
                     nullable: false
