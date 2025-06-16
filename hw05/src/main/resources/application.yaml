@@ -1,0 +1,49 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: "otus-user"
+  datasource:
+    url: jdbc:postgresql://${DB_HOST}:${DB_PORT}/${DB_NAME}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+    hikari:
+      schema: ${DB_SCHEMA}
+      maximum-pool-size: ${DATASOURCE_MAXIMUM_POOL_SIZE}
+      connection-timeout: ${DATASOURCE_CONNECTION_TIMEOUT}
+  jpa:
+    show-sql: false
+    open-in-view: false
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+        jdbc:
+          batch_size: 100
+        show_sql: false
+        format_sql: false
+        generate_statistics: false
+        cache:
+          use_second_level_cache: false
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+    enabled-by-default: true
+  endpoint:
+    health:
+      show-details: always
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+    distribution:
+      percentiles[http.server.requests]: 0.5, 0.7, 0.95, 0.99
+      percentiles-histogram:
+        "[http.server.requests]": true
+      slo[http.server.requests]: 10ms, 50ms, 100ms, 200ms, 300ms, 400ms, 500ms
+
+sleepMinTime: ${SLEEP_MIN_TIME}
+sleepMaxTime: ${SLEEP_MAX_TIME}

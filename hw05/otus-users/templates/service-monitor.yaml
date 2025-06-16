@@ -1,0 +1,18 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: service-monitor
+  labels:
+    {{- include "otus-users.labels" . | nindent 4 }}
+spec:
+  jobLabel: {{ include "otus-users.fullname" . }}
+  namespaceSelector:
+    matchNames:
+      - "{{ $.Release.Namespace }}"
+  endpoints:
+    - port: http
+      scrapeTimeout: 30s
+      path: /actuator/prometheus
+  selector:
+    matchLabels:
+      {{- include "otus-users.selectorLabels" . | nindent 6 }}
