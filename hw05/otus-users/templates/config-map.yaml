@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: postgres-conf
+  labels:
+    {{- include "otus-users.labels" . | nindent 4 }}
+data:
+  DB_HOST: "{{ .Release.Name }}-postgresql"
+  DB_PORT: "{{ .Values.postgresql.service.port }}"
+  DB_NAME: "{{ .Values.postgresql.auth.database }}"
+  DB_SCHEMA: "{{ .Values.postgresql.schema }}"
+  DB_USERNAME: "{{ .Values.postgresql.auth.username }}"
+  DATASOURCE_MAXIMUM_POOL_SIZE: "{{ .Values.postgresql.hikari.max_pool_size }}"
+  DATASOURCE_CONNECTION_TIMEOUT: "{{ .Values.postgresql.hikari.connection_time_out }}"
+  SLEEP_MIN_TIME: "{{ .Values.app.sleep_min_time }}"
+  SLEEP_MAX_TIME: "{{ .Values.app.sleep_max_time }}"
