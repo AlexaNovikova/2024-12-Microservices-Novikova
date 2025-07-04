@@ -2,15 +2,18 @@ package ru.otus.order.service.config;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
+import ru.otus.common.error.ShopException;
 import ru.otus.order.service.config.annotations.IdempotenceKey;
 import ru.otus.order.service.exception.IdempotenceException;
 import ru.otus.order.service.service.IdempotenceKeyService;
 
 import java.lang.reflect.Method;
 
+@Slf4j
 @Component
 public class IdempotentInterceptor implements HandlerInterceptor {
 
@@ -33,11 +36,12 @@ public class IdempotentInterceptor implements HandlerInterceptor {
         IdempotenceKey methodAnnotation = method.getAnnotation(IdempotenceKey.class);
         if (methodAnnotation != null) {
             try {
+                log.debug("Check ");
                 return idempotenceKeyService.checkIdempotenceRequest(request);
             } catch (IdempotenceException e) {
-                throw e;
+                throw new ShopException("idempotency.exception", "Ошибка. Попытка дублировать запрос");
             } catch (Exception e) {
-                throw new IdempotenceException("check idempotence exception:" + e.getMessage());
+                throw new ShopException("idempotency.exception", "Неизвестная ошибка");
             }
         }
         return true;

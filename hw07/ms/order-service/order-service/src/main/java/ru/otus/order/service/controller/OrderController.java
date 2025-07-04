@@ -55,6 +55,7 @@ public class OrderController {
         return service.getStatus(id, shopUser);
     }
 
+    @IdempotenceKey
     @PostMapping
     public OrderResponseDto createOrder(@UserContext ShopUser shopUser, @RequestBody AddItemRequestDto dto) {
         var userId = shopUser.getId();
