@@ -1,0 +1,2510 @@
+{
+	"info": {
+		"_postman_id": "4764cfe3-1bf5-4990-a7bf-08501579410d",
+		"name": "OTUS2",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "15573196"
+	},
+	"item": [
+		{
+			"name": "4. Helm",
+			"item": [
+				{
+					"name": "Получить всех пользователей",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Host",
+								"value": "arch.homework",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://arch.homework/api/v1/user",
+							"protocol": "http",
+							"host": [
+								"arch",
+								"homework"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Создать пользователя пользователя",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function() {\r",
+									"   pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"if (responseBody != null && responseBody != undefined) {\r",
+									"    var data = JSON.parse(responseBody);\r",
+									"    var id = data.id;\r",
+									"    pm.collectionVariables.set(\"user-id\", id);\r",
+									"}"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Host",
+								"value": "arch.homework",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"lastName\": \"{{$randomLastName}}\",\r\n    \"firstName\": \"{{$randomFirstName}}\",\r\n    \"secondName\": \"{{$randomFirstName}}\",\r\n    \"email\": \"{{$randomLastName}}@mail.ru\",\r\n    \"restaurantId\": \"235ad3a0-49d4-4852-99b0-9ab1ec6174f3\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://arch.homework/api/v1/user",
+							"protocol": "http",
+							"host": [
+								"arch",
+								"homework"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Получить пользователя по id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Host",
+								"value": "arch.homework",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"lastName\": \"Иванов\",\r\n    \"firstName\": \"Иван\",\r\n    \"secondName\": \"Иванович\",\r\n    \"email\": \"ivanov@mail.ru\",\r\n    \"restaurantId\": \"235ad3a0-49d4-4852-99b0-9ab1ec6174f3\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://arch.homework/api/v1/user/{{user-id}}",
+							"protocol": "http",
+							"host": [
+								"arch",
+								"homework"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"{{user-id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Обновить данные пользователя",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Host",
+								"value": "arch.homework",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"lastName\": \"Петров\",\r\n    \"firstName\": \"Петр\",\r\n    \"secondName\": \"Петрович\",\r\n    \"email\": \"petrov@mail.ru\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://arch.homework/api/v1/user/{{user-id}}",
+							"protocol": "http",
+							"host": [
+								"arch",
+								"homework"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"{{user-id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Удалить пользователя",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Host",
+								"value": "arch.homework",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://arch.homework/api/v1/user/{{user-id}}",
+							"protocol": "http",
+							"host": [
+								"arch",
+								"homework"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"{{user-id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "3. Базовые сущности Kubernetes",
+			"item": [
+				{
+					"name": "Базовые сущности Кubernetes: ReplicaSet, Deployment, Service, Ingress",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", () => {\r",
+									"  pm.expect(pm.response.code).to.eql(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status health is UP\", () => {\r",
+									"  const responseJson = pm.response.json();\r",
+									"  pm.expect(responseJson.status).to.eql(\"UP\");\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Host",
+								"value": "arch.homework",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://arch.homework/actuator/health",
+							"protocol": "http",
+							"host": [
+								"arch",
+								"homework"
+							],
+							"path": [
+								"actuator",
+								"health"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "19. Backend for frontends",
+			"item": [
+				{
+					"name": "Зарегистрировать пользователя 1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function() {\r",
+									"   pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"if (responseBody != null && responseBody != undefined) {\r",
+									"    var data = JSON.parse(responseBody);\r",
+									"    var id = data.id;\r",
+									"    pm.collectionVariables.set(\"user-id\", id);\r",
+									"}\r",
+									"\r",
+									"const requestBody = JSON.parse(pm.request.body.raw);\r",
+									"\r",
+									"if (requestBody != null && requestBody != undefined) {\r",
+									"    pm.collectionVariables.set(\"user-login\", requestBody.email);\r",
+									"    pm.collectionVariables.set(\"user-password\", requestBody.password);\r",
+									"}\r",
+									"\r",
+									"console.log(\"Authorization header:\", pm.request.headers.get(\"Authorization\"));"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"lastName\": \"{{$randomLastName}}\",\r\n    \"firstName\": \"{{$randomFirstName}}\",\r\n    \"secondName\": \"{{$randomFirstName}}\",\r\n    \"email\": \"{{$randomLastName}}@mail.ru\",\r\n    \"password\": \"{{$randomPassword}}\",\r\n    \"restaurantId\": \"235ad3a0-49d4-4852-99b0-9ab1ec6174f3\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/register",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Попытка изменить профиль без логина",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 401\", function() {\r",
+									"   pm.response.to.have.status(401);\r",
+									"});\r",
+									"\r",
+									"console.log(\"Authorization header:\", pm.request.headers.get(\"Authorization\"));"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"lastName\": \"{{$randomLastName}}\",\r\n    \"firstName\": \"{{$randomFirstName}}\",\r\n    \"secondName\": \"{{$randomFirstName}}\",\r\n    \"email\": \"{{$randomLastName}}@mail.ru\",\r\n    \"password\": \"{{$randomPassword}}\",\r\n    \"restaurantId\": \"235ad3a0-49d4-4852-99b0-9ab1ec6174f3\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/user/{{user-id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"{{user-id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Залогиниться под пользователем 1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function() {\r",
+									"   pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"if (responseBody != null && responseBody != undefined) {\r",
+									"    var data = JSON.parse(responseBody);\r",
+									"    var token = data.token;\r",
+									"    pm.collectionVariables.set(\"token\", token);\r",
+									"}\r",
+									"\r",
+									"console.log(\"Authorization header:\", pm.request.headers.get(\"Authorization\"));"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"login\": \"{{user-login}}\",\r\n    \"password\": \"{{user-password}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/auth/login/pwd",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"auth",
+								"login",
+								"pwd"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Изменить профиль под авторизованным пользователем 1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function() {\r",
+									"   pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"const responseJson = pm.response.json();\r",
+									"const requestBody = JSON.parse(pm.request.body.raw);\r",
+									"pm.test(\"Second name is changed\", function() {\r",
+									"    pm.expect(responseJson.secondName).to.eql(requestBody.secondName);\r",
+									"});\r",
+									"\r",
+									"console.log(\"Authorization header:\", pm.request.headers.get(\"Authorization\"));"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"secondName\": \"{{$randomFirstName}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/user/{{user-id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"{{user-id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Получить данные пользователя 1 под пользователем 1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function() {\r",
+									"   pm.response.to.have.status(200);\r",
+									"});\r",
+									"console.log(\"Authorization header:\", pm.request.headers.get(\"Authorization\"));"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/user/{{user-id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"{{user-id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Зарегистрировать пользователя 2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function() {\r",
+									"   pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"if (responseBody != null && responseBody != undefined) {\r",
+									"    var data = JSON.parse(responseBody);\r",
+									"    var id = data.id;\r",
+									"    pm.collectionVariables.set(\"user-id-2\", id);\r",
+									"}\r",
+									"\r",
+									"const requestBody = JSON.parse(pm.request.body.raw);\r",
+									"\r",
+									"if (requestBody != null && requestBody != undefined) {\r",
+									"    pm.collectionVariables.set(\"user-login-2\", requestBody.email);\r",
+									"    pm.collectionVariables.set(\"user-password-2\", requestBody.password);\r",
+									"}\r",
+									"\r",
+									"console.log(\"Authorization header:\", pm.request.headers.get(\"Authorization\"));"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"lastName\": \"{{$randomLastName}}\",\r\n    \"firstName\": \"{{$randomFirstName}}\",\r\n    \"secondName\": \"{{$randomFirstName}}\",\r\n    \"email\": \"{{$randomLastName}}@mail.ru\",\r\n    \"password\": \"{{$randomPassword}}\",\r\n    \"restaurantId\": \"235ad3a0-49d4-4852-99b0-9ab1ec6174f3\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/register",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Залогиниться под пользователем 2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function() {\r",
+									"   pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"if (responseBody != null && responseBody != undefined) {\r",
+									"    var data = JSON.parse(responseBody);\r",
+									"    var token = data.token;\r",
+									"    pm.collectionVariables.set(\"token-2\", token);\r",
+									"}\r",
+									"\r",
+									"console.log(\"Authorization header:\", pm.request.headers.get(\"Authorization\"));"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"login\": \"{{user-login-2}}\",\r\n    \"password\": \"{{user-password-2}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/auth/login/pwd",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"auth",
+								"login",
+								"pwd"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Получить данные пользователя 1 под пользователем 2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 403\", function() {\r",
+									"   pm.response.to.have.status(403);\r",
+									"});\r",
+									"\r",
+									"console.log(\"Authorization header:\", pm.request.headers.get(\"Authorization\"));"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token-2}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/user/{{user-id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"{{user-id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Изменить данные пользователя 1 под пользователем 2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 403\", function() {\r",
+									"   pm.response.to.have.status(403);\r",
+									"});\r",
+									"console.log(\"Authorization header:\", pm.request.headers.get(\"Authorization\"));"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token-2}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"secondName\": \"{{$randomFirstName}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/user/{{user-id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"{{user-id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Демонстрация проектной работы",
+			"item": [
+				{
+					"name": "Просмотреть меню",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function() {\r",
+									"   pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"console.log(\"Authorization header:\", pm.request.headers.get(\"Authorization\"));"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/menu/actual",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"menu",
+								"actual"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Зарегистрировать нового клиента",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function() {\r",
+									"   pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"if (responseBody != null && responseBody != undefined) {\r",
+									"    var data = JSON.parse(responseBody);\r",
+									"    var id = data.id;\r",
+									"    pm.collectionVariables.set(\"user-id\", id);\r",
+									"}\r",
+									"\r",
+									"const requestBody = JSON.parse(pm.request.body.raw);\r",
+									"\r",
+									"if (requestBody != null && requestBody != undefined) {\r",
+									"    pm.collectionVariables.set(\"user-login\", requestBody.email);\r",
+									"    pm.collectionVariables.set(\"user-password\", requestBody.password);\r",
+									"}\r",
+									"\r",
+									"console.log(\"Authorization header:\", pm.request.headers.get(\"Authorization\"));"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"lastName\": \"{{$randomLastName}}\",\r\n    \"firstName\": \"{{$randomFirstName}}\",\r\n    \"secondName\": \"{{$randomFirstName}}\",\r\n    \"email\": \"podomninatest@rambler.ru\",\r\n    \"password\": \"{{$randomPassword}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/register",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Залогиниться под новым клиентом",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function() {\r",
+									"   pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"if (responseBody != null && responseBody != undefined) {\r",
+									"    var data = JSON.parse(responseBody);\r",
+									"    var token = data.token;\r",
+									"    pm.collectionVariables.set(\"token\", token);\r",
+									"}\r",
+									"\r",
+									"console.log(\"Authorization header:\", pm.request.headers.get(\"Authorization\"));"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"login\": \"{{user-login}}\",\r\n    \"password\": \"{{user-password}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/auth/login/pwd",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"auth",
+								"login",
+								"pwd"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Положить денег на счет",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"amount\": 1000\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/account/fill-up",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"account",
+								"fill-up"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Проверить баланс на счете",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/account",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"account"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Положить блюдо в корзину",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"dishId\": 1,\r\n    \"quantity\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/order/cart/add",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"order",
+								"cart",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Просмотреть содержимое корзины",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/order/cart",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"order",
+								"cart"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Оформить заказ",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function() {\r",
+									"   pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"if (responseBody != null && responseBody != undefined) {\r",
+									"    var data = JSON.parse(responseBody);\r",
+									"    var id = data.id;\r",
+									"    pm.collectionVariables.set(\"order-id\", id);\r",
+									"}"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/order/cart/submit",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"order",
+								"cart",
+								"submit"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Посмотреть статус заказа",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/order/status/{{order-id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"order",
+								"status",
+								"{{order-id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Залогиниться под работником кафе",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function() {\r",
+									"   pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"if (responseBody != null && responseBody != undefined) {\r",
+									"    var data = JSON.parse(responseBody);\r",
+									"    var token = data.token;\r",
+									"    pm.collectionVariables.set(\"worker-token\", token);\r",
+									"}\r",
+									"\r",
+									"console.log(\"Authorization header:\", pm.request.headers.get(\"Authorization\"));"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"login\": \"ivanov@romashka.ru\",\r\n    \"password\": \"password\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/auth/login/pwd",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"auth",
+								"login",
+								"pwd"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Перевести заказ в статус ГОТОВ",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{worker-token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/order/status/{{order-id}}?status=READY",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"order",
+								"status",
+								"{{order-id}}"
+							],
+							"query": [
+								{
+									"key": "status",
+									"value": "READY"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Перевести заказ в статус ВЫДАН",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{worker-token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/order/status/{{order-id}}?status=DELIVERED",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"order",
+								"status",
+								"{{order-id}}"
+							],
+							"query": [
+								{
+									"key": "status",
+									"value": "DELIVERED"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "24. RESTful",
+			"item": [
+				{
+					"name": "Создать пользователя",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function() {\r",
+									"   pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"if (responseBody != null && responseBody != undefined) {\r",
+									"    var data = JSON.parse(responseBody);\r",
+									"    var id = data.id;\r",
+									"    pm.collectionVariables.set(\"user-id\", id);\r",
+									"}\r",
+									"\r",
+									"const requestBody = JSON.parse(pm.request.body.raw);\r",
+									"\r",
+									"if (requestBody != null && requestBody != undefined) {\r",
+									"    pm.collectionVariables.set(\"user-login\", requestBody.email);\r",
+									"    pm.collectionVariables.set(\"user-password\", requestBody.password);\r",
+									"}\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"lastName\": \"{{$randomLastName}}\",\r\n    \"firstName\": \"{{$randomFirstName}}\",\r\n    \"secondName\": \"{{$randomFirstName}}\",\r\n    \"email\": \"{{$randomLastName}}@mail.ru\",\r\n    \"password\": \"{{$randomPassword}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/register",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Залогиниться под новым пользователем",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function() {\r",
+									"   pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"if (responseBody != null && responseBody != undefined) {\r",
+									"    var data = JSON.parse(responseBody);\r",
+									"    var token = data.token;\r",
+									"    pm.collectionVariables.set(\"token\", token);\r",
+									"}"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"login\": \"{{user-login}}\",\r\n    \"password\": \"{{user-password}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/auth/login/pwd",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"auth",
+								"login",
+								"pwd"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Положить денег на счет",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function() {\r",
+									"   pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"if (responseBody != null && responseBody != undefined) {\r",
+									"    var data = JSON.parse(responseBody);\r",
+									"    pm.collectionVariables.set(\"init-amount\", data.amount);\r",
+									"}"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"amount\": 250\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/account/fill-up",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"account",
+								"fill-up"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Сделать заказ",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function() {\r",
+									"   pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"if (responseBody != null && responseBody != undefined) {\r",
+									"    var data = JSON.parse(responseBody);\r",
+									"    var totalPrice = data.totalPrice;\r",
+									"    pm.collectionVariables.set(\"order-price\", totalPrice);\r",
+									"}"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"productId\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/order",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"order"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Проверить баланс на счете",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function() {\r",
+									"   pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"const expectedAmount = pm.collectionVariables.get(\"init-amount\") - pm.collectionVariables.get(\"order-price\");\r",
+									"\r",
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Current amount is correct\", function() {\r",
+									"    pm.expect(responseJson.amount).to.eql(expectedAmount);\r",
+									"});\r",
+									"\r",
+									"pm.collectionVariables.set(\"current-amount\", responseJson.amount);\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/account",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"account"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Получить список уведомлений",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function() {\r",
+									"   pm.response.to.have.status(200);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/internal/notification",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"internal",
+								"notification"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Сделать заказ, на который не хватает денег",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function() {\r",
+									"   pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"if (responseBody != null && responseBody != undefined) {\r",
+									"    var data = JSON.parse(responseBody);\r",
+									"    var totalPrice = data.totalPrice;\r",
+									"    pm.collectionVariables.set(\"order-price-2\", totalPrice);\r",
+									"}"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"productId\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/order",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"order"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Проверить баланс на счете после второго заказа",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function() {\r",
+									"   pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"const expectedAmount = pm.collectionVariables.get(\"current-amount\");\r",
+									"\r",
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Current amount is correct\", function() {\r",
+									"    pm.expect(responseJson.amount).to.eql(expectedAmount);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/account",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"account"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Получить список уведомлений после неуспешной покупки",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function() {\r",
+									"   pm.response.to.have.status(200);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/internal/notification",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"internal",
+								"notification"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Идемпотентость и коммутативность API в HTTP и очередях",
+			"item": [
+				{
+					"name": "Создать пользователя",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function() {\r",
+									"   pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"if (responseBody != null && responseBody != undefined) {\r",
+									"    var data = JSON.parse(responseBody);\r",
+									"    var id = data.id;\r",
+									"    pm.collectionVariables.set(\"user-id\", id);\r",
+									"}\r",
+									"\r",
+									"const requestBody = JSON.parse(pm.request.body.raw);\r",
+									"\r",
+									"if (requestBody != null && requestBody != undefined) {\r",
+									"    pm.collectionVariables.set(\"user-login\", requestBody.email);\r",
+									"    pm.collectionVariables.set(\"user-password\", requestBody.password);\r",
+									"}\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"lastName\": \"{{$randomLastName}}\",\r\n    \"firstName\": \"{{$randomFirstName}}\",\r\n    \"secondName\": \"{{$randomFirstName}}\",\r\n    \"email\": \"{{$randomLastName}}@mail.ru\",\r\n    \"password\": \"{{$randomPassword}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/register",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Залогиниться под новым пользователем",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function() {\r",
+									"   pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"if (responseBody != null && responseBody != undefined) {\r",
+									"    var data = JSON.parse(responseBody);\r",
+									"    var token = data.token;\r",
+									"    pm.collectionVariables.set(\"token\", token);\r",
+									"}"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"login\": \"{{user-login}}\",\r\n    \"password\": \"{{user-password}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/auth/login/pwd",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"auth",
+								"login",
+								"pwd"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Положить денег на счет Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function() {\r",
+									"   pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"if (responseBody != null && responseBody != undefined) {\r",
+									"    var data = JSON.parse(responseBody);\r",
+									"    pm.collectionVariables.set(\"init-amount\", data.amount);\r",
+									"}"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"amount\": 5000\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/account/fill-up",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"account",
+								"fill-up"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Сделать заказ",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"console.log(\"x-request-id: \", pm.request.headers.get(\"x-request-id\"));\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function() {\r",
+									"   pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"if (responseBody != null && responseBody != undefined) {\r",
+									"    pm.collectionVariables.set(\"idempotencyKey\", pm.request.headers.get('x-request-id'));\r",
+									"    var data = JSON.parse(responseBody);\r",
+									"    var totalPrice = data.totalPrice;\r",
+									"    pm.collectionVariables.set(\"order-price\", totalPrice);\r",
+									"    pm.collectionVariables.set(\"order-id\", data.id);\r",
+									"    pm.collectionVariables.set(\"order-user-id\", data.userId);\r",
+									"}\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-request-id",
+								"value": "{{$guid}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"productId\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/order",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"order"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Проверить баланс на счете Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function() {\r",
+									"   pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"const expectedAmount = pm.collectionVariables.get(\"init-amount\") - pm.collectionVariables.get(\"order-price\");\r",
+									"\r",
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Current amount is correct\", function() {\r",
+									"    pm.expect(responseJson.amount).to.eql(expectedAmount);\r",
+									"});\r",
+									"\r",
+									"pm.collectionVariables.set(\"current-amount\", responseJson.amount);\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/account",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"account"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Сделать заказ с тем же Idempotency Key",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"console.log(\"x-request-id: \", pm.request.headers.get(\"x-request-id\"));\r",
+									"\r",
+									"pm.test(\"Status code is 422\", function() {\r",
+									"   pm.response.to.have.status(422);\r",
+									"});\r",
+									"\r",
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"\r",
+									"pm.test(\"Idempotency key is the same\", function() {\r",
+									"   pm.expect(pm.collectionVariables.get(\"idempotencyKey\")).to.eql(pm.request.headers.get('x-request-id'));\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-request-id",
+								"value": "{{idempotencyKey}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"productId\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/order",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"order"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Проверить баланс на счете Copy 2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function() {\r",
+									"   pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"const expectedAmount = pm.collectionVariables.get(\"init-amount\") - pm.collectionVariables.get(\"order-price\");\r",
+									"\r",
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Current amount is correct\", function() {\r",
+									"    pm.expect(responseJson.amount).to.eql(expectedAmount);\r",
+									"});\r",
+									"\r",
+									"pm.collectionVariables.set(\"current-amount\", responseJson.amount);\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/account",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"account"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Сделать заказ с другим Idempotency Key",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"console.log(\"X-Idempotency-Key: \", pm.request.headers.get(\"X-Idempotency-Key\"));\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function() {\r",
+									"   pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"const responseJson = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Order id is different\", function() {\r",
+									"   pm.expect(responseJson.id).not.eql(pm.collectionVariables.get(\"order-id\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"User id is the same\", function() {\r",
+									"   pm.expect(responseJson.userId).to.eql(pm.collectionVariables.get(\"order-user-id\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Idempotency key is different\", function() {\r",
+									"   pm.expect(pm.collectionVariables.get(\"idempotencyKey\")).not.eql(pm.request.headers.get('X-Idempotency-Key'));\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-request-id",
+								"value": "{{$guid}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"productId\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/order",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"order"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://arch.homework",
+			"type": "string"
+		},
+		{
+			"key": "user-id",
+			"value": ""
+		},
+		{
+			"key": "user-login",
+			"value": ""
+		},
+		{
+			"key": "user-password",
+			"value": ""
+		},
+		{
+			"key": "token",
+			"value": ""
+		},
+		{
+			"key": "user-secondname-new",
+			"value": ""
+		},
+		{
+			"key": "user-id-2",
+			"value": ""
+		},
+		{
+			"key": "user-login-2",
+			"value": ""
+		},
+		{
+			"key": "user-password-2",
+			"value": ""
+		},
+		{
+			"key": "token-2",
+			"value": ""
+		},
+		{
+			"key": "order-id",
+			"value": ""
+		},
+		{
+			"key": "worker-token",
+			"value": ""
+		},
+		{
+			"key": "init-amount",
+			"value": ""
+		},
+		{
+			"key": "order-price",
+			"value": ""
+		},
+		{
+			"key": "order-price-2",
+			"value": ""
+		},
+		{
+			"key": "current-amount",
+			"value": ""
+		},
+		{
+			"key": "idempotencyKey",
+			"value": ""
+		},
+		{
+			"key": "order-user-id",
+			"value": ""
+		}
+	]
+}
