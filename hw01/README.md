@@ -128,7 +128,7 @@
 
 ### Схема взаимодействия сервисов
 
-![services](./images/servicesSchema.png)
+![services](./images/MicroservicesDiagram.png)
 
 ### Системные действия в виде API
 
